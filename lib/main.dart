@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:vintage_games/view-games.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Skill Builder',
-      home: Scaffold(
+      home: viewGames(title: "Bruce’s Retro Games",) /*Scaffold(
         appBar: AppBar(
           title: const Text("Bruce’s Retro Games"),
         ),
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
                 );
               }),
             ),
-        ),
+        ),*/
       
     );
   }
