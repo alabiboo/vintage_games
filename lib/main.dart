@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Skill Builder',
-      home: viewGames(title: "Bruce’s Retro Games",) /*Scaffold(
+      home: ViewGames() /*Scaffold(
         appBar: AppBar(
           title: const Text("Bruce’s Retro Games"),
         ),

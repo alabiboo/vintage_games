@@ -1,18 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'model/game-model.dart';
 import 'services/game_service.dart';
 
-class viewGames extends StatefulWidget {
-  final String title;
-  const viewGames({ Key? key, required this.title }) : super(key: key);
+class ViewGames extends StatefulWidget { 
+  const ViewGames({ Key? key }) : super(key: key);
 
   @override
-  _viewGamesState createState() => _viewGamesState();
+  _ViewGamesState createState() => _ViewGamesState();
 }
 
-class _viewGamesState extends State<viewGames> {
+class _ViewGamesState extends State<ViewGames> {
 
   TextEditingController searchTextController = new TextEditingController();
 
@@ -53,15 +51,42 @@ class _viewGamesState extends State<viewGames> {
 
 
   Widget cartviewwidget(Game game){
-    return Container( 
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(width: 2, color: Colors.blueAccent) 
-            ),
-            child: Center(child: Text(game.title, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),)),
-      );
+    return Stack(
+      alignment: AlignmentDirectional.topEnd,
+      children: [ 
+        Container( 
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(width: 2, color: Colors.blueAccent) 
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(game.thumbnail),
+                        ),
+                      ),
+                    ), 
+                    Text(game.title, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,),),
+                  ],
+                ),
+          ),
+          Container( 
+            margin: EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+              ),
+          child: Icon(Icons.favorite, color: Colors.red,)),
+      ],
+    );
   }
   SliverAppBar createSilverAppBarOne() {
     return SliverAppBar(
@@ -160,8 +185,21 @@ class _viewGamesState extends State<viewGames> {
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
+                    leading: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(50.0) 
+                        ),
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(gameTempList[index].thumbnail),
+                        ),
+                      ),
+                    ),
                     title: Text(gameTempList[index].title, style: TextStyle(fontSize: 18.0),),
-                    trailing: Icon(Icons.arrow_forward_ios_rounded),
+                    trailing: Icon(Icons.favorite, color: Colors.red,),
                   ),
                 );
               })
